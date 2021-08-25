@@ -1,0 +1,4 @@
+node_modules/
+dist/
+__testing__/results/
+__testing__/coverage/
