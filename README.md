@@ -1,2 +1,2 @@
-# workflow-exampl-react
-an example of a react application using workflow examples and good practices for docker
+# workflow-example-react
+An example of a react application using workflow examples and good practices for docker
