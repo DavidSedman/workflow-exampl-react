@@ -7,14 +7,30 @@
     "@testing-library/react": "^12.0.0",
     "@testing-library/user-event": "^13.2.1",
     "@types/jest": "^27.0.1",
-    "@types/node": "^16.7.1",
+    "@types/node": "^16.7.10",
     "@types/react": "^17.0.19",
     "@types/react-dom": "^17.0.9",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
-    "typescript": "^4.3.5",
+    "typescript": "^4.4.2",
     "web-vitals": "^2.1.0"
+  },
+  "devDependencies": {
+    "@babel/preset-react": "^7.14.5",
+    "@typescript-eslint/eslint-plugin": "^4.30.0",
+    "@typescript-eslint/parser": "^4.30.0",
+    "babel-eslint": "^10.1.0",
+    "depcheck": "^1.4.2",
+    "eslint-config-react-app": "^6.0.0",
+    "eslint-plugin-flowtype": "^5.9.2",
+    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-jest": "^24.4.0",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.25.1",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "eslint-plugin-testing-library": "^3.10.2",
+    "prettier": "^2.3.2"
   },
   "scripts": {
     "format": "prettier --write .",
@@ -23,6 +39,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:ci": "CI=true npm test -- --coverage",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -43,7 +60,26 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
-    "depcheck": "^1.4.2"
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,ts,tsx}",
+      "!<rootDir>/src/index.tsx",
+      "!<rootDir>/src/react-app-env.ts",
+      "!<rootDir>/src/reportWebVitals.ts",
+      "!<rootDir>/src/setupTests.ts"
+    ],
+    "coverageReporters": [
+      "lcov",
+      "cobertura",
+      "text-summary"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 90,
+        "functions": 90,
+        "lines": 90,
+        "statements": 90
+      }
+    }
   }
 }

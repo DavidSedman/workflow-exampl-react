@@ -96,5 +96,15 @@ jobs:
         docker load --input /tmp/api_image.tar
 
     - name: Run automated tests inside Docker
-      run: docker run --volume="$(pwd)/src:/api" --entrypoint="sh" api:latest -c "npm ci && npm test"
+      run: docker run --volume="$(pwd)/src:/api" --entrypoint="sh" api:latest -c "npm ci && npm run test:ci" 
     
+    - name: Publish Coverage
+      uses: zolex/cobertura-action@9.1.0
+      with:
+        path: "src/coverage/cobertura-coverage.xml"
+        use_annotations: true
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        minimum_coverage: 75
+        skip_covered: false
+        fail_below_threshold: true
+        pull_request_number: ${{ needs.checkout.outputs.pull_request }}
