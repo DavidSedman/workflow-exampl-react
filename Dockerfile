@@ -1,19 +1,23 @@
-FROM node:14.17-alpine AS build
+FROM node:14.17-alpine AS development
 
-WORKDIR /api
+WORKDIR /app
 
-COPY src .
+COPY app .
 
-RUN npm i && npm run build
-
-FROM node:14.17-alpine
-
-WORKDIR /api
-
-COPY --from=build /api/build ./build
-COPY src/package* ./
-
-RUN npm ci
+RUN npm i
 
 ENTRYPOINT [ "npm" ]
 CMD [ "start" ]
+
+FROM node:14.17-alpine AS build
+
+WORKDIR /app
+
+COPY app .
+
+RUN npm i && npm run build
+
+FROM nginx:1.20-alpine
+
+COPY docker /
+COPY --from=build /app/build /usr/share/nginx/html
