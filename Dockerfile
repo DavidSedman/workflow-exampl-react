@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY app .
 
-RUN npm i
+RUN npm ci
 
 ENTRYPOINT [ "npm" ]
 CMD [ "start" ]
@@ -15,7 +15,7 @@ WORKDIR /app
 
 COPY app .
 
-RUN npm i && npm run build
+RUN npm ci && npm run build
 
 FROM nginx:1.20-alpine
 

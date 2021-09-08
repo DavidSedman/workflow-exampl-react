@@ -27,6 +27,7 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         context: .
+        target: build
         push: false
         file: ./Dockerfile
         tags: api:latest
