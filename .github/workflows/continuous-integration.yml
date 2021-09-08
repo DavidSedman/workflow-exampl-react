@@ -57,7 +57,7 @@ jobs:
         docker load --input /tmp/api_image.tar
 
     - name: Run lint inside docker
-      run: docker run --volume="$(pwd)/src:/api" --entrypoint="sh" api:latest -c "npm ci && npm run lint"
+      run: docker run --volume="$(pwd)/app:/app" --entrypoint="sh" api:latest -c "npm ci && npm run lint"
     
   Dependancies:
     name: "TypeScript: Package Dependancies"
@@ -77,7 +77,7 @@ jobs:
         docker load --input /tmp/api_image.tar
 
     - name: Run dependancy Tracking inside Docker 
-      run: docker run --volume="$(pwd)/src:/api" --entrypoint="sh" api:latest -c "npm ci && npm run depend"
+      run: docker run --volume="$(pwd)/app:/app" --entrypoint="sh" api:latest -c "npm ci && npm run depend"
   
   Test:
     name: "TypeScript: Automated Test"
@@ -97,7 +97,7 @@ jobs:
         docker load --input /tmp/api_image.tar
 
     - name: Run automated tests inside Docker
-      run: docker run --volume="$(pwd)/src:/api" --entrypoint="sh" api:latest -c "npm ci && npm run test:ci" 
+      run: docker run --volume="$(pwd)/app:/app" --entrypoint="sh" api:latest -c "npm ci && npm run test:ci" 
     
     - name: Publish Coverage
       uses: zolex/cobertura-action@9.1.0
